@@ -1,0 +1,87 @@
+﻿<Window x:Class="StudentAttendance.WPF.Views.StudentsManagerView"
+        x:Name="StudentsManagerModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentAttendance.WPF.Views"
+        mc:Ignorable="d"
+        Title="StudentsManagerView" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" Grid.Column="0" DockPanel.Dock="Bottom"
+                      FontWeight="Normal"
+                      SelectedItem="{Binding SelectedStudent}"
+                      ItemsSource="{Binding Students}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <Image Source="{Binding Photo}" Height="60" HorizontalAlignment="Center" Width="80"></Image>
+                        <TextBlock Text="{Binding User.FullName}" FontSize="16" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Width="20"></TextBlock>
+                        <TextBlock Text="{Binding User.Username}" FontSize="16" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Width="20"></TextBlock>
+                        <TextBlock Text="{Binding User.Password}" FontSize="16" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Width="20"></TextBlock>
+                        <TextBlock Text="{Binding Group.Name}" FontSize="16" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <WrapPanel HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <Label FontSize="16">Имя пользователя</Label>
+                <TextBox Width="120" Margin="10, 0, 0, 0" Text="{Binding SelectedUsername}"></TextBox>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <Label FontSize="16">Пароль</Label>
+                <TextBox Width="120" Margin="10, 0, 0, 0" Text="{Binding SelectedPassword}"></TextBox>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <Label FontSize="16">ФИО</Label>
+                <TextBox Width="120" Margin="10, 0, 0, 0" Text="{Binding SelectedFullName}"></TextBox>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <Label FontSize="16">Группа</Label>
+                <ComboBox Width="160" Margin="20, 0, 0, 0" FontSize="24"
+                          ItemsSource="{Binding Groups}" 
+                          DisplayMemberPath="Name" 
+                          SelectedItem="{Binding SelectedGroup}"></ComboBox>
+            </WrapPanel>
+            <WrapPanel AllowDrop="True" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <Label FontSize="16">Фото</Label>
+                <TextBox x:Name="PathTextBox" Width="120" Margin="10, 0, 0, 0" Text="{Binding SelectedPhoto}"/>
+                <Button Width="80" FontSize="16" Height="30" Command="{Binding ChoosePathCommand}">Выбрать</Button>
+            </WrapPanel>
+            <Button Margin="0, 25, 0, 0" Width="160" Height="40" FontSize="22" 
+                    BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                    Command="{Binding AddCommand}" >Добавить</Button>
+
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Width="200" Height="50" FontSize="26" 
+                BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                Command="{Binding CloseCommand}" 
+                CommandParameter="{Binding ElementName=StudentsManagerModel}">Закрыть</Button>
+        <Button Grid.Column="0" Grid.Row="1" Width="200" Height="50" FontSize="26" 
+                BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                Command="{Binding DeleteCommand}" >Удалить</Button>
+
+    </Grid>
+</Window>

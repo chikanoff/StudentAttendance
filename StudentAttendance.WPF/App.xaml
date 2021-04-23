@@ -1,0 +1,8 @@
+﻿<Application x:Class="StudentAttendance.WPF.App"
+             xmlns:local="clr-namespace:StudentAttendance.WPF"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dependencies="clr-namespace:StudentAttendance.WPF.Dependencies">
+    <Application.Resources>
+    </Application.Resources>
+</Application>

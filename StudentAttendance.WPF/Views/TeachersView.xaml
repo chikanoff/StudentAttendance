@@ -1,0 +1,114 @@
+﻿<Window x:Class="StudentAttendance.WPF.Views.TeachersView"
+        x:Name="TeacherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentAttendance.WPF.Views"
+        xmlns:vm="clr-namespace:StudentAttendance.WPF.ViewModels"
+        mc:Ignorable="d"
+        Title="TeachersView" Height="700" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel>
+                <WrapPanel>
+                    <Label Content="ФИО: " FontSize="24"></Label>
+                    <TextBlock FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding CurrentUser.FullName}"></TextBlock>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Дисциплины" FontSize="24"/>
+                    <TextBlock FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Disciplines}"></TextBlock>
+                </WrapPanel>
+                
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding UpdateSkipsCommand}" >Обновить</Button>
+                <Button Grid.Row="1" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding OpenSkipManagerCommand}" >Добавить Пропуск</Button>
+                <Button Grid.Row="2" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding DeleteSkipCommand}" >Удалить Пропуск</Button>
+                <Button Grid.Row="3" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding OpenDisciplinesCommand}" >Дисциплины</Button>
+                <Button Grid.Row="4" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding OpenStudentsManagerCommand}" >Студенты</Button>
+                <Button Grid.Row="5" Width="220" Height="50" FontSize="24" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding OpenReportManagerCommand}" >Отчеты</Button>
+            </Grid>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center" FontSize="26" FontWeight="Medium">Пропуски</Label>
+                <ListView Grid.Row="1" DockPanel.Dock="Bottom"
+                          FontWeight="Normal"
+                          SelectedItem="{Binding SelectedSkip}"
+                          ItemsSource="{Binding Skips}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <Image Source="{Binding Student.Photo}" Height="60" HorizontalAlignment="Center" Width="80"></Image>
+                                <TextBlock Width="20"></TextBlock>
+                                <TextBlock Text="{Binding Student.User.FullName}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Width="20"></TextBlock>
+                                <TextBlock Text="{Binding Student.Group.Name}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Width="20"></TextBlock>
+                                <TextBlock Text="{Binding Discipline.Name}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Width="20"></TextBlock>
+                                <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="200" Height="60" FontSize="26" 
+                    BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                    Command="{Binding LogoutCommand}" 
+                    CommandParameter="{Binding ElementName=TeacherWindow}">К логину</Button>
+            <Button Grid.Column="1" Width="200" Height="60" FontSize="26" 
+                    BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                    Command="{Binding QuitCommand}" 
+                    CommandParameter="{Binding ElementName=TeacherWindow}">Выход</Button>
+        </Grid>
+    </Grid>
+</Window>

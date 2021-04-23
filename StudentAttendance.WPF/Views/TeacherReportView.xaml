@@ -1,0 +1,67 @@
+﻿<Window x:Class="StudentAttendance.WPF.Views.TeacherReportView"
+        x:Name="TeacherReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentAttendance.WPF.Views"
+        mc:Ignorable="d"
+        Title="TeacherReportView" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <WrapPanel HorizontalAlignment="Center" Margin="0, 15, 0, 0">
+                    <StackPanel>
+                        <Label HorizontalAlignment="Center" FontSize="18">От</Label>
+                        <TextBlock Text="{Binding Path=SelectedStartDate, StringFormat=dd.MM.yyyy}" HorizontalAlignment="Center"></TextBlock>
+                        <Calendar SelectedDate="{Binding Path=SelectedStartDate}" DisplayDate="04/22/2021"
+                                  DisplayDateStart="12/12/2010"
+                                  DisplayDateEnd="12/12/2022"></Calendar>
+                    </StackPanel>
+
+                    <StackPanel Margin="25, 0, 0, 0">
+                        <Label HorizontalAlignment="Center" FontSize="18">До</Label>
+                        <TextBlock Text="{Binding Path=SelectedEndDate, StringFormat=dd.MM.yyyy}" HorizontalAlignment="Center"></TextBlock>
+                        <Calendar SelectedDate="{Binding Path=SelectedEndDate}" DisplayDate="04/22/2021"
+                                  DisplayDateStart="12/12/2010"
+                                  DisplayDateEnd="12/12/2022"></Calendar>
+                    </StackPanel>
+                </WrapPanel>
+
+                <WrapPanel Margin="25, 25, 0, 0">
+                    <Label FontSize="20" VerticalAlignment="Center">Дисциплина</Label>
+                    <ComboBox Margin="30, 0, 0, 0" Width="180" Height="50" ItemsSource="{Binding Disciplines}" 
+                              DisplayMemberPath="Name" FontSize="24"
+                              SelectedItem="{Binding SelectedDiscipline}"/>
+                </WrapPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label FontSize="20" HorizontalAlignment="Center">Имя файла</Label>
+                <TextBox Margin="0, 10, 0, 0" FontSize="22" Text="{Binding Path=FileName}"></TextBox>
+                <Button Margin="0, 25, 0, 0" Width="180" Height="50" FontSize="22" 
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding SaveToXmlCommand}">Сохранить</Button>
+            </StackPanel>
+            
+
+        </Grid>
+        <Button Grid.Row="1" Width="200" Height="60" FontSize="24" 
+                BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                Command="{Binding CloseCommand}" 
+                CommandParameter="{Binding ElementName=TeacherReportWindow}">Закрыть</Button>
+
+    </Grid>
+</Window>

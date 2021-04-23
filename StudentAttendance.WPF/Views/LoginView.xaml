@@ -1,0 +1,47 @@
+﻿<Window x:Class="StudentAttendance.WPF.Views.LoginView"
+        x:Name="LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="LoginView" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="160" Height="40" FontSize="26" 
+                    BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                    Command="{Binding QuitCommand}" 
+                    CommandParameter="{Binding ElementName=LoginWindow}">Выход</Button>
+
+            <Button Grid.Column="1" Width="160" Height="40" FontSize="26" 
+                    BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=LoginWindow}">Логин</Button>
+        </Grid>
+        <WrapPanel Grid.Row="0" Margin="15,25">
+            <Label FontSize="24">Логин</Label>
+            <TextBox Margin="15, 0, 15, 0" 
+                     Width="200" FontSize="24"
+                     Text="{Binding SelectedUsername}"></TextBox>
+        </WrapPanel>
+        <WrapPanel Grid.Row="1" Margin="15,15">
+            <Label FontSize="24">Пароль</Label>
+            <TextBox Margin="15, 0, 15, 0" 
+                     Width="200" FontSize="24"
+                     Text="{Binding SelectedPassword}"></TextBox>
+        </WrapPanel>
+    </Grid>
+</Window>

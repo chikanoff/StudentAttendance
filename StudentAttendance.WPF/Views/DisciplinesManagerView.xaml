@@ -1,0 +1,87 @@
+﻿<Window x:Class="StudentAttendance.WPF.Views.DisciplinesManagerView"
+        x:Name="DisciplinesManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentAttendance.WPF.Views"
+        mc:Ignorable="d"
+        Title="DisciplinesManagerView" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        BorderBrush="Black"
+        BorderThickness="3">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.65*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center" FontSize="26" FontWeight="Medium">Дисциплины</Label>
+
+                <ListView Grid.Row="1" DockPanel.Dock="Bottom"
+                          FontWeight="Normal"
+                          SelectedItem="{Binding SelectedDiscipline}"
+                          ItemsSource="{Binding Disciplines}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Width="20"></TextBlock>
+                                <TextBlock Text="{Binding Teacher.User.FullName}" FontSize="16" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <StackPanel Grid.Column="1">
+                <WrapPanel Margin="25, 25, 0, 0">
+                    <Label FontSize="24">Название</Label>
+                    <TextBox FontSize="24" Width="220" Margin="25, 0, 0, 0" Text="{Binding SelectedName}"></TextBox>
+                </WrapPanel>
+                <WrapPanel Margin="25, 35, 0, 0">
+                    <Label FontSize="24">Преподаватель</Label>
+                    <ComboBox Width="220" Margin="25, 0, 0, 0" FontSize="24"
+                              ItemsSource="{Binding Teachers}" 
+                              DisplayMemberPath="User.FullName" 
+                              SelectedItem="{Binding SelectedTeacher}"></ComboBox>
+                </WrapPanel>
+                <Button Width="160" Height="40" FontSize="22" Margin="0, 25, 0, 0"
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding AddDisciplineCommand}" 
+                        CommandParameter="{Binding ElementName=DisciplinesManagerWindow}">Добавить</Button>
+                <Button Width="160" Height="40" FontSize="22" Margin="0, 25, 0, 0"
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding EditDisciplineCommand}" 
+                        CommandParameter="{Binding ElementName=DisciplinesManagerWindow}">Изменить</Button>
+                <Button Width="160" Height="40" FontSize="22" Margin="0, 25, 0, 0"
+                        BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                        Command="{Binding DeleteDisciplineCommand}" 
+                        CommandParameter="{Binding ElementName=DisciplinesManagerWindow}">Удалить</Button>
+
+            </StackPanel>
+
+
+
+        </Grid>
+
+        <Button Grid.Row="1" Width="200" Height="50" FontSize="26" 
+                BorderBrush="OrangeRed" Background="LightGoldenrodYellow" FontWeight="Medium"
+                Command="{Binding QuitCommand}" 
+                CommandParameter="{Binding ElementName=DisciplinesManagerWindow}">Закрыть</Button>
+
+    </Grid>
+</Window>
